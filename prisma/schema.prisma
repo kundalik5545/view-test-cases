@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model xpsTestCase {
+  id               String            @id @default(uuid())
+  testCaseId       String
+  location         String
+  testCaseName     String
+  expectedResult   String?
+  actualResult     String?
+  automationStatus AutomationStatus?
+  testStatus       TestStatus?
+  module           Module?
+  schemeLevel      SchemeLevel?
+  client           Client?
+  comments         String
+  defectId         String?
+}
+
+model eMemberTestCase {
+  id               String            @id @default(uuid())
+  testCaseId       String
+  location         String
+  testCaseName     String
+  expectedResult   String?
+  actualResult     String?
+  automationStatus AutomationStatus?
+  testStatus       TestStatus?
+  portal           Portal?
+  comments         String
+  defectId         String?
+}
+
+enum AutomationStatus {
+  Automated
+  NotAutomated
+  Blocked
+  InProgress
+}
+
+enum TestStatus {
+  Passed
+  Failed
+  Blocked
+  Skipped
+  NotRun
+}
+
+enum Module {
+  Details
+  ToolsAndProcesses
+  Letters
+  Leavers
+  Reports
+  Others
+}
+
+enum SchemeLevel {
+  TL
+  ML
+  SL
+}
+
+enum Client {
+  XPS
+  Other
+}
+
+enum Portal {
+  Admin
+  Public
+  CAT
+  Fusion
+  Umbraco
+  DataHub
+  Other
+}
