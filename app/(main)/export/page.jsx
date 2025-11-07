@@ -35,6 +35,12 @@ const SCHEME_LEVEL = ["TL", "ML", "SL"];
 
 const CLIENT = ["XPS", "Other"];
 
+const RELEASE_NO = ["R3_43", "R3_44", "R3_45"];
+
+const EM_RELEASE_NO = ["Old", "New", "Other"];
+
+const PRIORITY = ["High", "Medium", "Low"];
+
 const PORTAL = [
   "Admin",
   "Public",
@@ -68,9 +74,21 @@ const SELECT_ITEMS = {
     { value: ALL_VALUE_SUFFIX, label: "All" },
     ...CLIENT.map((s) => ({ value: s, label: s })),
   ],
+  releaseNo: [
+    { value: ALL_VALUE_SUFFIX, label: "All" },
+    ...RELEASE_NO.map((s) => ({ value: s, label: s })),
+  ],
+  priority: [
+    { value: ALL_VALUE_SUFFIX, label: "All" },
+    ...PRIORITY.map((s) => ({ value: s, label: s })),
+  ],
   portal: [
     { value: ALL_VALUE_SUFFIX, label: "All" },
     ...PORTAL.map((s) => ({ value: s, label: s })),
+  ],
+  emReleaseNo: [
+    { value: ALL_VALUE_SUFFIX, label: "All" },
+    ...EM_RELEASE_NO.map((s) => ({ value: s, label: s })),
   ],
 };
 
@@ -81,12 +99,16 @@ export default function ExportPage() {
     module: ALL_VALUE_SUFFIX,
     schemeLevel: ALL_VALUE_SUFFIX,
     client: ALL_VALUE_SUFFIX,
+    releaseNo: ALL_VALUE_SUFFIX,
+    priority: ALL_VALUE_SUFFIX,
   });
 
   const [ememberFilters, setEmemberFilters] = useState({
     automationStatus: ALL_VALUE_SUFFIX,
     testStatus: ALL_VALUE_SUFFIX,
     portal: ALL_VALUE_SUFFIX,
+    emReleaseNo: ALL_VALUE_SUFFIX,
+    priority: ALL_VALUE_SUFFIX,
   });
 
   const [xpsCount, setXpsCount] = useState(0);
@@ -387,7 +409,7 @@ export default function ExportPage() {
                     </Select>
                   </div>
 
-                  <div className="space-y-2 sm:col-span-2">
+                  <div className="space-y-2">
                     <label className="text-sm font-medium">Client</label>
                     <Select
                       value={xpsFilters.client}
@@ -400,6 +422,48 @@ export default function ExportPage() {
                       </SelectTrigger>
                       <SelectContent>
                         {SELECT_ITEMS.client.map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Release No</label>
+                    <Select
+                      value={xpsFilters.releaseNo}
+                      onValueChange={(value) =>
+                        handleXpsFilterChange("releaseNo", value)
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="All" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {SELECT_ITEMS.releaseNo.map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Priority</label>
+                    <Select
+                      value={xpsFilters.priority}
+                      onValueChange={(value) =>
+                        handleXpsFilterChange("priority", value)
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="All" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {SELECT_ITEMS.priority.map((item) => (
                           <SelectItem key={item.value} value={item.value}>
                             {item.label}
                           </SelectItem>
@@ -536,7 +600,7 @@ export default function ExportPage() {
                     </Select>
                   </div>
 
-                  <div className="space-y-2 sm:col-span-2">
+                  <div className="space-y-2">
                     <label className="text-sm font-medium">Portal</label>
                     <Select
                       value={ememberFilters.portal}
@@ -549,6 +613,48 @@ export default function ExportPage() {
                       </SelectTrigger>
                       <SelectContent>
                         {SELECT_ITEMS.portal.map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Release No</label>
+                    <Select
+                      value={ememberFilters.emReleaseNo}
+                      onValueChange={(value) =>
+                        handleEmemberFilterChange("emReleaseNo", value)
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="All" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {SELECT_ITEMS.emReleaseNo.map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Priority</label>
+                    <Select
+                      value={ememberFilters.priority}
+                      onValueChange={(value) =>
+                        handleEmemberFilterChange("priority", value)
+                      }
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="All" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {SELECT_ITEMS.priority.map((item) => (
                           <SelectItem key={item.value} value={item.value}>
                             {item.label}
                           </SelectItem>

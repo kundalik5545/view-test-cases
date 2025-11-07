@@ -36,9 +36,21 @@ export async function POST(request) {
         if (filters.client) {
           where.client = filters.client;
         }
+        if (filters.releaseNo) {
+          where.releaseNo = filters.releaseNo;
+        }
+        if (filters.priority) {
+          where.priority = filters.priority;
+        }
       } else if (type === "emember") {
         if (filters.portal) {
           where.portal = filters.portal;
+        }
+        if (filters.emReleaseNo) {
+          where.emReleaseNo = filters.emReleaseNo;
+        }
+        if (filters.priority) {
+          where.priority = filters.priority;
         }
       }
     }
@@ -80,8 +92,12 @@ export async function POST(request) {
         row.Module = tc.module || "";
         row["Scheme Level"] = tc.schemeLevel || "";
         row.Client = tc.client || "";
+        row["Release No"] = tc.releaseNo || "";
+        row.Priority = tc.priority || "";
       } else {
         row.Portal = tc.portal || "";
+        row["Release No"] = tc.emReleaseNo || "";
+        row.Priority = tc.priority || "";
       }
 
       return row;
@@ -105,6 +121,8 @@ export async function POST(request) {
             { wch: 15 }, // Module
             { wch: 12 }, // Scheme Level
             { wch: 10 }, // Client
+            { wch: 12 }, // Release No
+            { wch: 10 }, // Priority
             { wch: 30 }, // Comments
             { wch: 15 }, // Defect ID
           ]
@@ -117,6 +135,8 @@ export async function POST(request) {
             { wch: 18 }, // Automation Status
             { wch: 12 }, // Test Status
             { wch: 15 }, // Portal
+            { wch: 12 }, // Release No
+            { wch: 10 }, // Priority
             { wch: 30 }, // Comments
             { wch: 15 }, // Defect ID
           ];

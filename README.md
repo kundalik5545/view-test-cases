@@ -30,7 +30,7 @@ pnpm exec node prisma/seed.js
 
 ### Fix 🪛
 
-- add release no and priority enums
+- add release no and priority enums ✅
 - update dropdown val in meaningfull way
 - update add page ui
 - update enum values make relatable to project

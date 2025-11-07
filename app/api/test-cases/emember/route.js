@@ -20,6 +20,14 @@ export async function GET(request) {
       where.portal = searchParams.get("portal");
     }
 
+    if (searchParams.get("emReleaseNo")) {
+      where.emReleaseNo = searchParams.get("emReleaseNo");
+    }
+
+    if (searchParams.get("priority")) {
+      where.priority = searchParams.get("priority");
+    }
+
     const testCases = await prisma.eMemberTestCase.findMany({
       where: Object.keys(where).length > 0 ? where : undefined,
     });

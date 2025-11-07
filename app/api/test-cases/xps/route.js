@@ -28,6 +28,14 @@ export async function GET(request) {
       where.client = searchParams.get("client");
     }
 
+    if (searchParams.get("releaseNo")) {
+      where.releaseNo = searchParams.get("releaseNo");
+    }
+
+    if (searchParams.get("priority")) {
+      where.priority = searchParams.get("priority");
+    }
+
     const testCases = await prisma.xpsTestCase.findMany({
       where: Object.keys(where).length > 0 ? where : undefined,
     });
@@ -56,6 +64,8 @@ export async function POST(request) {
       module,
       schemeLevel,
       client,
+      releaseNo,
+      priority,
       comments,
       defectId,
     } = body;
@@ -82,13 +92,6 @@ export async function POST(request) {
       );
     }
 
-    if (!comments) {
-      return NextResponse.json(
-        { error: "comments is required" },
-        { status: 400 }
-      );
-    }
-
     const newTestCase = await prisma.xpsTestCase.create({
       data: {
         testCaseId,
@@ -101,7 +104,9 @@ export async function POST(request) {
         module: module || null,
         schemeLevel: schemeLevel || null,
         client: client || null,
-        comments,
+        releaseNo: releaseNo || null,
+        priority: priority || null,
+        comments: comments || null,
         defectId: defectId || null,
         screenshots: "[]",
       },
@@ -111,7 +116,7 @@ export async function POST(request) {
   } catch (error) {
     console.error("Error creating test case:", error);
     return NextResponse.json(
-      { error: "Failed to create test case" },
+      { error: error.message || "Failed to create test case" },
       { status: 500 }
     );
   }
@@ -151,16 +156,61 @@ export async function PUT(request) {
       );
     }
 
-    if (updateData.comments !== undefined && !updateData.comments) {
-      return NextResponse.json(
-        { error: "comments is required" },
-        { status: 400 }
-      );
-    }
+    // Convert empty strings to null for optional enum and string fields
+    const cleanedData = {
+      ...updateData,
+      expectedResult:
+        updateData.expectedResult !== undefined
+          ? updateData.expectedResult || null
+          : undefined,
+      actualResult:
+        updateData.actualResult !== undefined
+          ? updateData.actualResult || null
+          : undefined,
+      automationStatus:
+        updateData.automationStatus !== undefined
+          ? updateData.automationStatus || null
+          : undefined,
+      testStatus:
+        updateData.testStatus !== undefined
+          ? updateData.testStatus || null
+          : undefined,
+      module:
+        updateData.module !== undefined ? updateData.module || null : undefined,
+      schemeLevel:
+        updateData.schemeLevel !== undefined
+          ? updateData.schemeLevel || null
+          : undefined,
+      client:
+        updateData.client !== undefined ? updateData.client || null : undefined,
+      releaseNo:
+        updateData.releaseNo !== undefined
+          ? updateData.releaseNo || null
+          : undefined,
+      priority:
+        updateData.priority !== undefined
+          ? updateData.priority || null
+          : undefined,
+      comments:
+        updateData.comments !== undefined
+          ? updateData.comments || null
+          : undefined,
+      defectId:
+        updateData.defectId !== undefined
+          ? updateData.defectId || null
+          : undefined,
+    };
+
+    // Remove undefined fields to avoid overwriting with undefined
+    Object.keys(cleanedData).forEach((key) => {
+      if (cleanedData[key] === undefined) {
+        delete cleanedData[key];
+      }
+    });
 
     const updatedTestCase = await prisma.xpsTestCase.update({
       where: { id },
-      data: updateData,
+      data: cleanedData,
     });
 
     return NextResponse.json({ testCase: updatedTestCase });
@@ -173,7 +223,7 @@ export async function PUT(request) {
       );
     }
     return NextResponse.json(
-      { error: "Failed to update test case" },
+      { error: error.message || "Failed to update test case" },
       { status: 500 }
     );
   }

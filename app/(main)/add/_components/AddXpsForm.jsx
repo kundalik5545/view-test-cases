@@ -32,6 +32,8 @@ const AddXpsForm = ({ onSuccess, onCancel }) => {
     module: "",
     schemeLevel: "",
     client: "",
+    releaseNo: "",
+    priority: "",
     comments: "",
     defectId: "",
   });
@@ -76,6 +78,8 @@ const AddXpsForm = ({ onSuccess, onCancel }) => {
         module: "",
         schemeLevel: "",
         client: "",
+        releaseNo: "",
+        priority: "",
         comments: "",
         defectId: "",
       });
@@ -278,6 +282,44 @@ const AddXpsForm = ({ onSuccess, onCancel }) => {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="releaseNo">Release No</Label>
+              <Select
+                value={formData.releaseNo || ""}
+                onValueChange={(value) => handleChange("releaseNo", value)}
+                disabled={isLoading}
+              >
+                <SelectTrigger id="releaseNo">
+                  <SelectValue placeholder="Select release number" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="R3_43">R3_43</SelectItem>
+                  <SelectItem value="R3_44">R3_44</SelectItem>
+                  <SelectItem value="R3_45">R3_45</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="priority">Priority</Label>
+              <Select
+                value={formData.priority || ""}
+                onValueChange={(value) => handleChange("priority", value)}
+                disabled={isLoading}
+              >
+                <SelectTrigger id="priority">
+                  <SelectValue placeholder="Select priority" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="High">High</SelectItem>
+                  <SelectItem value="Medium">Medium</SelectItem>
+                  <SelectItem value="Low">Low</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="defectId">Defect ID</Label>
               <Input
                 id="defectId"
@@ -289,14 +331,11 @@ const AddXpsForm = ({ onSuccess, onCancel }) => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="comments">
-              Comments <span className="text-destructive">*</span>
-            </Label>
+            <Label htmlFor="comments">Comments</Label>
             <Input
               id="comments"
               value={formData.comments}
               onChange={(e) => handleChange("comments", e.target.value)}
-              required
               disabled={isLoading}
             />
           </div>

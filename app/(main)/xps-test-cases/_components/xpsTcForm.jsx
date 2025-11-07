@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -25,9 +25,33 @@ const XpsTcForm = ({ testCase, onSave, onCancel, isLoading }) => {
     module: testCase?.module || "",
     schemeLevel: testCase?.schemeLevel || "",
     client: testCase?.client || "",
+    releaseNo: testCase?.releaseNo || "",
+    priority: testCase?.priority || "",
     comments: testCase?.comments || "",
     defectId: testCase?.defectId || "",
   });
+
+  // Update form data when testCase prop changes
+  useEffect(() => {
+    if (testCase) {
+      setFormData({
+        testCaseId: testCase.testCaseId || "",
+        location: testCase.location || "",
+        testCaseName: testCase.testCaseName || "",
+        expectedResult: testCase.expectedResult || "",
+        actualResult: testCase.actualResult || "",
+        automationStatus: testCase.automationStatus || "",
+        testStatus: testCase.testStatus || "",
+        module: testCase.module || "",
+        schemeLevel: testCase.schemeLevel || "",
+        client: testCase.client || "",
+        releaseNo: testCase.releaseNo || "",
+        priority: testCase.priority || "",
+        comments: testCase.comments || "",
+        defectId: testCase.defectId || "",
+      });
+    }
+  }, [testCase]);
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -191,6 +215,42 @@ const XpsTcForm = ({ testCase, onSave, onCancel, isLoading }) => {
         </div>
 
         <div className="space-y-2">
+          <Label htmlFor="releaseNo">Release No</Label>
+          <Select
+            value={formData.releaseNo || ""}
+            onValueChange={(value) => handleChange("releaseNo", value)}
+          >
+            <SelectTrigger id="releaseNo">
+              <SelectValue placeholder="Select release number" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="R3_43">R3_43</SelectItem>
+              <SelectItem value="R3_44">R3_44</SelectItem>
+              <SelectItem value="R3_45">R3_45</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="priority">Priority</Label>
+          <Select
+            value={formData.priority || ""}
+            onValueChange={(value) => handleChange("priority", value)}
+          >
+            <SelectTrigger id="priority">
+              <SelectValue placeholder="Select priority" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="High">High</SelectItem>
+              <SelectItem value="Medium">Medium</SelectItem>
+              <SelectItem value="Low">Low</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
           <Label htmlFor="defectId">Defect ID</Label>
           <Input
             id="defectId"
@@ -206,7 +266,6 @@ const XpsTcForm = ({ testCase, onSave, onCancel, isLoading }) => {
           id="comments"
           value={formData.comments}
           onChange={(e) => handleChange("comments", e.target.value)}
-          required
         />
       </div>
 

@@ -39,6 +39,7 @@ model eMemberTestCase {
   automationStatus AutomationStatus?
   testStatus       TestStatus?
   portal           Portal? 
+  emReleaseNo      EmReleaseNo?
   priority         Priority?
   comments         String?
   defectId         String?

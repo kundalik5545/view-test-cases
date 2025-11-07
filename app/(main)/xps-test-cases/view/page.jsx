@@ -253,6 +253,21 @@ const XpsTcViewPage = () => {
                   </p>
                 </div>
                 <div className="space-y-1">
+                  <Label className="text-muted-foreground">Release No</Label>
+                  <p className="text-sm font-medium">
+                    {currentTestCase.releaseNo || "—"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <Label className="text-muted-foreground">Priority</Label>
+                  <p className="text-sm font-medium">
+                    {currentTestCase.priority || "—"}
+                  </p>
+                </div>
+                <div className="space-y-1">
                   <Label className="text-muted-foreground">Defect ID</Label>
                   <p className="text-sm font-medium">
                     {currentTestCase.defectId || "—"}
