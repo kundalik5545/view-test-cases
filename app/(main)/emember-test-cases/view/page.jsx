@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import EmTcForm from "../_components/emTcForm";
+import ScreenshotManager from "@/components/ScreenshotManager";
 import { PlusIcon } from "lucide-react";
 
 const EmemberTcViewPage = () => {
@@ -264,6 +265,17 @@ const EmemberTcViewPage = () => {
                 <Label className="text-muted-foreground">Comments</Label>
                 <p className="text-sm">{currentTestCase.comments || "—"}</p>
               </div>
+
+              {!isEditing && (
+                <div className="border-t pt-6">
+                  <ScreenshotManager
+                    testCaseId={currentTestCase.testCaseId}
+                    testCaseDbId={currentTestCase.id}
+                    type="emember"
+                    portal={currentTestCase.portal}
+                  />
+                </div>
+              )}
             </div>
           )}
         </CardContent>

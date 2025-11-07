@@ -1,38 +1,35 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  BarChart2,
   BadgeCheck,
   Ban,
-  FileText,
+  BarChart2,
   Bug,
-  User,
-  Hourglass,
-  Loader2,
-  Layers,
-  Tag,
   Grid,
-  PieChart as PieIcon,
+  Hourglass,
+  Layers,
+  Loader2,
+  Tag,
 } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 
 import {
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  LineChart,
-  Line,
-  Legend,
 } from "recharts";
 
 const fetchStats = async () => {
@@ -125,9 +122,7 @@ export default function XpsTestCases() {
           <div className="flex items-center gap-4">
             <BarChart2 className="h-9 w-9 text-sky-600" />
             <div>
-              <h1 className="text-3xl font-extrabold">
-                XPS Test Cases Dashboard
-              </h1>
+              <h1 className="text-3xl font-extrabold">XPS TC Dashboard</h1>
               <p className="text-sm text-muted-foreground">
                 High‑visibility dashboard with charts and large, readable
                 metrics

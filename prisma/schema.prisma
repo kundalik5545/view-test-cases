@@ -24,6 +24,7 @@ model xpsTestCase {
   client           Client?
   comments         String
   defectId         String?
+  screenshots      String             @default("[]")
 }
 
 model eMemberTestCase {
@@ -38,6 +39,7 @@ model eMemberTestCase {
   portal           Portal?
   comments         String
   defectId         String?
+  screenshots      String             @default("[]")
 }
 
 enum AutomationStatus {

@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import XpsTcForm from "../_components/xpsTcForm";
+import ScreenshotManager from "@/components/ScreenshotManager";
 import { PlusIcon } from "lucide-react";
 
 const XpsTcViewPage = () => {
@@ -277,6 +278,18 @@ const XpsTcViewPage = () => {
                 <Label className="text-muted-foreground">Comments</Label>
                 <p className="text-sm">{currentTestCase.comments || "—"}</p>
               </div>
+
+              {!isEditing && (
+                <div className="border-t pt-6">
+                  <ScreenshotManager
+                    testCaseId={currentTestCase.testCaseId}
+                    testCaseDbId={currentTestCase.id}
+                    type="xps"
+                    schemeLevel={currentTestCase.schemeLevel}
+                    module={currentTestCase.module}
+                  />
+                </div>
+              )}
             </div>
           )}
         </CardContent>

@@ -25,3 +25,9 @@ pnpm exec prisma studio
 # run seed
 
 pnpm exec node prisma/seed.js
+
+plan this functionality where i want copy paste button for each test cases so that whenever user take screenshot then he can paste in particular test case.
+
+- now that screenshot will then stored inside public folder with testcaseID_SchemeLevel_module_timestamp.png format.
+- Also will be shown in test cases in view.jsx page.
+- User can remove the screenshot or add another one (keep name testcaseID_SchemeLevel_module_timestamp_2.png)
