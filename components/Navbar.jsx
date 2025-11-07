@@ -3,20 +3,20 @@ import Link from "next/link";
 
 const routes = [
   { name: "Upload Data", path: "/data-uploads" },
+  { name: "Add TC", path: "/add" },
+  { name: "Export", path: "/export" },
   { name: "XPS TC", path: "/xps-test-cases" },
   { name: "eMember TC", path: "/emember-test-cases" },
   { name: "Test Case Data", path: "/test-cases" },
-  { name: "XPS API", path: "/api/test-cases/xps" },
-  { name: "eMember API", path: "/api/test-cases/emember" },
 ];
 
 const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full h-16 bg-white/80 dark:bg-zinc-900/80 border-b border-zinc-200 dark:border-zinc-800 backdrop-blur z-50">
-      <div className="max-w-5xl mx-auto h-full flex items-center justify-between px-4">
+      <div className="max-w-7xl mx-auto h-full flex items-center justify-between px-4">
         <Link
           href="/"
-          className="text-lg font-bold text-blue-600 tracking-tight"
+          className="text-xl font-bold text-blue-600 tracking-tight"
         >
           Test Case Manager
         </Link>

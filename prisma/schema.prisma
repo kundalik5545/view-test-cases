@@ -22,7 +22,9 @@ model xpsTestCase {
   module           Module?
   schemeLevel      SchemeLevel?
   client           Client?
-  comments         String
+  releaseNo        ReleaseNo?
+  priority         Priority?
+  comments         String?
   defectId         String?
   screenshots      String             @default("[]")
 }
@@ -36,8 +38,9 @@ model eMemberTestCase {
   actualResult     String?
   automationStatus AutomationStatus?
   testStatus       TestStatus?
-  portal           Portal?
-  comments         String
+  portal           Portal? 
+  priority         Priority?
+  comments         String?
   defectId         String?
   screenshots      String             @default("[]")
 }
@@ -50,11 +53,11 @@ enum AutomationStatus {
 }
 
 enum TestStatus {
+  NotRun
   Passed
   Failed
   Blocked
   Skipped
-  NotRun
 }
 
 enum Module {
@@ -85,4 +88,23 @@ enum Portal {
   Umbraco
   DataHub
   Other
+}
+
+
+enum ReleaseNo {
+  R3_43
+  R3_44
+  R3_45  
+}
+
+enum EmReleaseNo {
+Old
+New
+Other
+}
+
+enum Priority {
+  High
+  Medium
+  Low
 }
