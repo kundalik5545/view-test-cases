@@ -17,13 +17,13 @@ export default function Home() {
           Upload Data
         </a>
         <a
-          href="/xps"
+          href="/xps-test-cases"
           className="inline-block rounded border border-blue-600 px-6 py-2 text-blue-600 font-medium shadow hover:bg-blue-50 dark:hover:bg-zinc-900 transition"
         >
           View XPS Test Cases
         </a>
         <a
-          href="/emember"
+          href="/emember-test-cases"
           className="inline-block rounded border border-blue-600 px-6 py-2 text-blue-600 font-medium shadow hover:bg-blue-50 dark:hover:bg-zinc-900 transition"
         >
           View eMember Test Cases
