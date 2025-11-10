@@ -224,7 +224,7 @@ export default function ExportPageRedesign() {
   );
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-slate-50 py-8">
+    <div className="min-h-[calc(100vh-80px)] bg-slate-50 py-8 pt-20">
       <div className="container mx-auto max-w-7xl px-4 sm:px-6">
         {/* header */}
         <div className="mb-8 flex items-center justify-between">

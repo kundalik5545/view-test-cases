@@ -381,7 +381,9 @@ export default function EmemberTestCases() {
                           </div>
                           <div>
                             <div className="text-lg font-semibold">
-                              {p.name}
+                              <Link href={`/emember-test-cases/${p.name}`}>
+                                {p.name}
+                              </Link>
                             </div>
                             <div className="text-xs text-muted-foreground">
                               {p.value} test(s) •{" "}

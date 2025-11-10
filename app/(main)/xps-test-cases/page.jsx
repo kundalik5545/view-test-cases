@@ -421,7 +421,9 @@ export default function XpsTestCases() {
                           </div>
                           <div>
                             <div className="text-lg font-semibold">
-                              {m.name}
+                              <Link href={`/xps-test-cases/${m.name}`}>
+                                {m.name}
+                              </Link>
                             </div>
                             <div className="text-xs text-muted-foreground">
                               {m.value} test(s) •{" "}
@@ -467,7 +469,9 @@ export default function XpsTestCases() {
                           </div>
                           <div>
                             <div className="text-lg font-semibold">
-                              {s.name}
+                              <Link href={`/xps-test-cases/${s.name}`}>
+                                {s.name}
+                              </Link>
                             </div>
                             <div className="text-xs text-muted-foreground">
                               {s.value} test(s) •{" "}

@@ -36,11 +36,48 @@ export async function GET(request) {
       where.priority = searchParams.get("priority");
     }
 
+    // Handle search parameter (searches in testCaseId and testCaseName)
+    const searchTerm = searchParams.get("search");
+    if (searchTerm && searchTerm.trim()) {
+      const searchLower = searchTerm.toLowerCase();
+      // For SQLite, we'll fetch all matching records and filter in memory for case-insensitive search
+      // This is acceptable for reasonable dataset sizes
+      where.OR = [
+        {
+          testCaseId: {
+            contains: searchTerm,
+          },
+        },
+        {
+          testCaseName: {
+            contains: searchTerm,
+          },
+        },
+      ];
+    }
+
     const testCases = await prisma.xpsTestCase.findMany({
       where: Object.keys(where).length > 0 ? where : undefined,
+      orderBy: {
+        testCaseId: "asc",
+      },
     });
 
-    return NextResponse.json({ testCases, count: testCases.length });
+    // Apply case-insensitive filtering if search term exists
+    let filteredTestCases = testCases;
+    if (searchTerm && searchTerm.trim()) {
+      const searchLower = searchTerm.toLowerCase();
+      filteredTestCases = testCases.filter(
+        (tc) =>
+          tc.testCaseId.toLowerCase().includes(searchLower) ||
+          tc.testCaseName.toLowerCase().includes(searchLower)
+      );
+    }
+
+    return NextResponse.json({
+      testCases: filteredTestCases,
+      count: filteredTestCases.length,
+    });
   } catch (error) {
     console.error("Error fetching test cases:", error);
     return NextResponse.json(
